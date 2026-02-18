@@ -16,7 +16,7 @@ public class WeatherService : IWeatherService
         _client = client;
     }
 
-    public async Task BuscarESalvarClima(string cidade)
+    public async Task<WeatherRecord> BuscarESalvarClima(string cidade)
     {
         var apiResponse = await _client.GetWeatherAsync(cidade);
 
@@ -34,12 +34,14 @@ public class WeatherService : IWeatherService
         };
 
         await _repository.AddAsync(record);
+
+        return record;
     }
 
     public async Task<List<WeatherRecord>> BuscarPorPeriodo(
-        string cidade,
-        DateTime inicio,
-        DateTime fim)
+      string cidade,
+      DateTime inicio,
+      DateTime fim)
     {
         return await _repository.GetByPeriodAsync(cidade, inicio, fim);
     }
@@ -49,9 +51,15 @@ public class WeatherService : IWeatherService
         var data = await _repository.GetTodayAsync(cidade);
 
         if (!data.Any())
-            return null;
+            return new EstatisticasDto
+            {
+                Minima = 0,
+                Maxima = 0,
+                Media = 0,
+                Registros = 0
+            };
 
-        return new
+        return new EstatisticasDto
         {
             Minima = data.Min(x => x.TemperaturaMin),
             Maxima = data.Max(x => x.TemperaturaMax),

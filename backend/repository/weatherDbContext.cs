@@ -21,11 +21,14 @@ public class WeatherRepository : IWeatherRepository
 
     public async Task<List<WeatherRecord>> GetByPeriodAsync(string cidade, DateTime inicio, DateTime fim)
     {
+        inicio = inicio.Date;
+        fim = fim.Date.AddDays(1).AddTicks(-1);
+
         return await _context.WeatherRecords
-            .Where(x => x.Cidade == cidade &&
-                        x.DataConsulta >= inicio &&
-                        x.DataConsulta <= fim)
-            .OrderBy(x => x.DataConsulta)
+            .Where(x =>
+                x.Cidade == cidade &&
+                x.DataConsulta >= inicio &&
+                x.DataConsulta <= fim)
             .ToListAsync();
     }
 

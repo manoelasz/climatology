@@ -27,7 +27,9 @@ export class DashboardComponent implements OnInit {
   constructor(private service: WeatherService) {}
 
   ngOnInit(): void {
+    this.service.consultarCidade(this.cidade).subscribe(() => {
     this.carregarDadosHoje();
+  });
   }
 
   carregarDadosHoje() {
@@ -87,5 +89,12 @@ export class DashboardComponent implements OnInit {
         }]
       }
     });
+    
   }
+  buscar() {
+  console.log("Buscando:", this.cidade, this.inicio, this.fim);
+
+  this.buscarPeriodo();
+  this.buscarEstatisticas();
+}
 }

@@ -17,8 +17,8 @@ public class WeatherController : ControllerBase
     [HttpPost("consultar")]
     public async Task<IActionResult> Consultar([FromQuery] string cidade)
     {
-        await _service.BuscarESalvarClima(cidade);
-        return Ok();
+        var result = await _service.BuscarESalvarClima(cidade);
+        return Ok(result);
     }
 
     [HttpGet("periodo")]
