@@ -22,7 +22,7 @@ export class WeatherService {
       .set('inicio', inicio)
       .set('fim', fim);
 
-    return this.http.get(`${this.apiUrl}/periodo`, { params });
+    return this.http.get(`${this.apiUrl}/periodo?cidade=${cidade}&inicio=${inicio}&fim=${fim}`);
   }
 
   obterEstatisticasHoje(cidade: string): Observable<any> {

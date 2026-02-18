@@ -23,6 +23,9 @@ public class WeatherService : IWeatherService
         if (apiResponse == null)
             throw new Exception("Não foi possível obter dados climáticos");
 
+        if (string.IsNullOrWhiteSpace(cidade))
+            throw new ArgumentException("Cidade é obrigatória", nameof(cidade));
+
         var record = new WeatherRecord
         {
             Cidade = cidade,
