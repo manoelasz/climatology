@@ -13,7 +13,7 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   consultarCidade(cidade: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/consultar?cidade=${cidade}`, {});
+    return this.http.get(`${this.apiUrl}/consultar?cidade=${cidade}`);
   }
 
   buscarPorPeriodo(cidade: string, inicio: string, fim: string): Observable<any> {
