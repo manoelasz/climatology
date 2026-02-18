@@ -96,5 +96,5 @@ export class DashboardComponent implements OnInit {
 
   this.buscarPeriodo();
   this.buscarEstatisticas();
-}
+  }
 }

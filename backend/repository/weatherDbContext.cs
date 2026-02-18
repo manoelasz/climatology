@@ -34,11 +34,13 @@ public class WeatherRepository : IWeatherRepository
 
     public async Task<List<WeatherRecord>> GetTodayAsync(string cidade)
     {
-        var hoje = DateTime.UtcNow.Date;
+        var hojeInicio = DateTime.UtcNow.Date;
+        var hojeFim = hojeInicio.AddDays(1).AddTicks(-1);
 
         return await _context.WeatherRecords
             .Where(x => x.Cidade == cidade &&
-                        x.DataConsulta.Date == hoje)
+                        x.DataConsulta >= hojeInicio &&
+                        x.DataConsulta <= hojeFim)
             .ToListAsync();
     }
 }

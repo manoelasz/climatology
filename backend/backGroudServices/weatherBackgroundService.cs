@@ -27,7 +27,7 @@ public class WeatherBackgroundService : BackgroundService
                 await service.BuscarESalvarClima(cidade);
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
         }
     }
 }
