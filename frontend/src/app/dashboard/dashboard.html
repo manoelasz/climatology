@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h2>Dashboard Climático</h2>
+
+  <div class="filtros">
+    <select [(ngModel)]="cidade">
+      <option>São Paulo</option>
+      <option>Rio de Janeiro</option>
+      <option>Brasília</option>
+      <option>Belo Horizonte</option>
+    </select>
+
+    <input type="date" [(ngModel)]="inicio">
+    <input type="date" [(ngModel)]="fim">
+
+    <button (click)="buscarPeriodo(); buscarEstatisticas()">
+      Buscar
+    </button>
+  </div>
+
+  <div class="cards" *ngIf="estatisticas">
+    <div class="card">🌡 Min: {{estatisticas.minima}}°C</div>
+    <div class="card">🔥 Max: {{estatisticas.maxima}}°C</div>
+    <div class="card">📊 Média: {{estatisticas.media | number:'1.1-1'}}°C</div>
+    <div class="card">📝 Registros: {{estatisticas.registros}}</div>
+  </div>
+
+  <div class="graficos">
+    <canvas id="graficoTemp"></canvas>
+    <canvas id="graficoUmidade"></canvas>
+  </div>
+
+</div>
