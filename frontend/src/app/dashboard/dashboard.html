@@ -1,33 +1,81 @@
-<div class="container">
+<div class="dashboard-container">
 
-  <h2>Dashboard Climático</h2>
+  <h1 class="titulo">🌤 Dashboard Climático</h1>
 
   <div class="filtros">
-    <select [(ngModel)]="cidade">
-      <option>São Paulo</option>
-      <option>Rio de Janeiro</option>
-      <option>Brasília</option>
-      <option>Belo Horizonte</option>
-    </select>
 
-    <input type="date" [(ngModel)]="inicio">
-    <input type="date" [(ngModel)]="fim">
+    <div class="campo">
+      <label>Cidade</label>
+      <select [(ngModel)]="cidade">
+        <option>São Paulo</option>
+        <option>Rio de Janeiro</option>
+        <option>Brasília</option>
+      </select>
+    </div>
 
-    <button (click)="buscarPeriodo(); buscarEstatisticas()">
+    <div class="campo">
+      <label>Data Inicial</label>
+      <input type="date" [(ngModel)]="inicio">
+    </div>
+
+    <div class="campo">
+      <label>Data Final</label>
+      <input type="date" [(ngModel)]="fim">
+    </div>
+
+    <button class="btn-buscar"
+     (click)="buscar()">
       Buscar
     </button>
+
   </div>
 
-  <div class="cards" *ngIf="estatisticas">
-    <div class="card">🌡 Min: {{estatisticas.minima}}°C</div>
-    <div class="card">🔥 Max: {{estatisticas.maxima}}°C</div>
-    <div class="card">📊 Média: {{estatisticas.media | number:'1.1-1'}}°C</div>
-    <div class="card">📝 Registros: {{estatisticas.registros}}</div>
+  @if (estatisticas) {
+  <div class="cards">
+
+    <div class="card">
+      <span class="icone">🌡</span>
+      <div>
+        <small>Mínima</small>
+        <h3>{{estatisticas.minima}}°C</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="icone">🔥</span>
+      <div>
+        <small>Máxima</small>
+        <h3>{{estatisticas.maxima}}°C</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="icone">📊</span>
+      <div>
+        <small>Média</small>
+        <h3>{{estatisticas.media | number:'1.1-1'}}°C</h3>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="icone">📝</span>
+      <div>
+        <small>Registros</small>
+        <h3>{{estatisticas.registros}}</h3>
+      </div>
+    </div>
+
   </div>
+}
 
   <div class="graficos">
-    <canvas id="graficoTemp"></canvas>
-    <canvas id="graficoUmidade"></canvas>
+    <div class="grafico-box">
+      <canvas id="graficoTemp"></canvas>
+    </div>
+
+    <div class="grafico-box">
+      <canvas id="graficoUmidade"></canvas>
+    </div>
   </div>
 
 </div>
