@@ -32,5 +32,5 @@ ng serve ou npm start(rodar)
 ``https://localhost:5001`` ou ``http://localhost:5000``
 
 ```bash
-git clone [https://manoelasz.com/projeto.git](https://github.com/manoelasz/climatology.git)
+git clone (https://github.com/manoelasz/climatology.git)
 cd projeto
